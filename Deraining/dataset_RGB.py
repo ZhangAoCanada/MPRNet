@@ -121,12 +121,12 @@ class DataLoaderVal(Dataset):
 
         # Resizing image in the multiple of 16"
         wd_new,ht_new = inp_img.size
-        if ht_new>wd_new and ht_new>1024:
-            wd_new = int(np.ceil(wd_new*1024/ht_new))
-            ht_new = 1024
-        elif ht_new<=wd_new and wd_new>1024:
+        if ht_new>wd_new and ht_new>256:
+            wd_new = int(np.ceil(wd_new*256/ht_new))
+            ht_new = 256
+        elif ht_new<=wd_new and wd_new>256:
             ht_new = int(np.ceil(ht_new*1024/wd_new))
-            wd_new = 1024
+            wd_new = 256
         wd_new = int(16*np.ceil(wd_new/16.0))
         ht_new = int(16*np.ceil(ht_new/16.0))
         inp_img = inp_img.resize((wd_new,ht_new), Image.ANTIALIAS)
