@@ -1,10 +1,12 @@
+import sys
+sys.path.append('/content/drive/MyDrive/DERAIN/MPRNet/Deraining')
 import os
 from config import Config 
 opt = Config('training.yml')
 
-gpus = ','.join([str(i) for i in opt.GPU])
-os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
-os.environ["CUDA_VISIBLE_DEVICES"] = gpus
+# gpus = ','.join([str(i) for i in opt.GPU])
+# os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
+# os.environ["CUDA_VISIBLE_DEVICES"] = gpus
 
 import torch
 torch.backends.cudnn.benchmark = True

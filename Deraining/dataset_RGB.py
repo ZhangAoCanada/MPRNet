@@ -5,6 +5,7 @@ from PIL import Image
 import torchvision.transforms.functional as TF
 from pdb import set_trace as stx
 import random
+import numpy as np
 
 def is_image_file(filename):
     return any(filename.endswith(extension) for extension in ['jpeg', 'JPEG', 'jpg', 'png', 'JPG', 'PNG', 'gif'])
@@ -13,11 +14,13 @@ class DataLoaderTrain(Dataset):
     def __init__(self, rgb_dir, img_options=None):
         super(DataLoaderTrain, self).__init__()
 
-        inp_files = sorted(os.listdir(os.path.join(rgb_dir, 'input')))
-        tar_files = sorted(os.listdir(os.path.join(rgb_dir, 'target')))
+        inp_files = sorted(os.listdir(os.path.join(rgb_dir, 'data')))
+        tar_files = sorted(os.listdir(os.path.join(rgb_dir, 'gt')))
 
-        self.inp_filenames = [os.path.join(rgb_dir, 'input', x)  for x in inp_files if is_image_file(x)]
-        self.tar_filenames = [os.path.join(rgb_dir, 'target', x) for x in tar_files if is_image_file(x)]
+        # self.inp_filenames = [os.path.join(rgb_dir, 'data', x)  for x in inp_files if is_image_file(x)]
+        # self.tar_filenames = [os.path.join(rgb_dir, 'gt', x) for x in tar_files if is_image_file(x)]
+        self.inp_filenames = [x  for x in inp_files if is_image_file(x)]
+        self.tar_filenames = [x for x in tar_files if is_image_file(x)]
 
         self.img_options = img_options
         self.sizex       = len(self.tar_filenames)  # get the size of target
@@ -114,10 +117,23 @@ class DataLoaderVal(Dataset):
         inp_img = Image.open(inp_path)
         tar_img = Image.open(tar_path)
 
-        # Validate on center crop
-        if self.ps is not None:
-            inp_img = TF.center_crop(inp_img, (ps,ps))
-            tar_img = TF.center_crop(tar_img, (ps,ps))
+        # Resizing image in the multiple of 16"
+        wd_new,ht_new = inp_img.size
+        if ht_new>wd_new and ht_new>1024:
+            wd_new = int(np.ceil(wd_new*1024/ht_new))
+            ht_new = 1024
+        elif ht_new<=wd_new and wd_new>1024:
+            ht_new = int(np.ceil(ht_new*1024/wd_new))
+            wd_new = 1024
+        wd_new = int(16*np.ceil(wd_new/16.0))
+        ht_new = int(16*np.ceil(ht_new/16.0))
+        inp_img = inp_img.resize((wd_new,ht_new), Image.ANTIALIAS)
+        tar_img = tar_img.resize((wd_new, ht_new), Image.ANTIALIAS)
+
+        # # Validate on center crop
+        # if self.ps is not None:
+        #     inp_img = TF.center_crop(inp_img, (ps,ps))
+        #     tar_img = TF.center_crop(tar_img, (ps,ps))
 
         inp_img = TF.to_tensor(inp_img)
         tar_img = TF.to_tensor(tar_img)
