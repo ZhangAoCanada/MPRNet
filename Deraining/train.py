@@ -28,6 +28,8 @@ from warmup_scheduler import GradualWarmupScheduler
 from tqdm import tqdm
 from pdb import set_trace as stx
 
+from torch.utils.tensorboard import SummaryWriter
+
 ######### Set Seeds ###########
 random.seed(1234)
 np.random.seed(1234)
@@ -98,6 +100,11 @@ val_loader = DataLoader(dataset=val_dataset, batch_size=1, shuffle=False, num_wo
 print('===> Start Epoch {} End Epoch {}'.format(start_epoch,opt.OPTIM.NUM_EPOCHS + 1))
 print('===> Loading datasets')
 
+log_dir = "./logs"
+if not os.path.exists(log_dir):
+    os.mkdir(log_dir)
+writer = SummaryWriter(log_dir)
+
 best_psnr = 0
 best_epoch = 0
 
@@ -131,6 +138,7 @@ for epoch in range(start_epoch, opt.OPTIM.NUM_EPOCHS + 1):
         loss.backward()
         optimizer.step()
         epoch_loss +=loss.item()
+        writer.add_scalar('train/loss', loss.item(), (epoch-1)*len(train_loader)+i)
 
     #### Evaluation ####
     if epoch%opt.TRAINING.VAL_AFTER_EVERY == 0:
@@ -148,6 +156,7 @@ for epoch in range(start_epoch, opt.OPTIM.NUM_EPOCHS + 1):
                 psnr_val_rgb.append(utils.torchPSNR(res, tar))
 
         psnr_val_rgb  = torch.stack(psnr_val_rgb).mean().item()
+        writer.add_scalar('val/psnr_rgb', psnr_val_rgb, epoch * len(train_loader))
 
         if psnr_val_rgb > best_psnr:
             best_psnr = psnr_val_rgb
