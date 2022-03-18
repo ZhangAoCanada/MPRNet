@@ -93,11 +93,13 @@ class DataLoaderVal(Dataset):
     def __init__(self, rgb_dir, img_options=None, rgb_dir2=None):
         super(DataLoaderVal, self).__init__()
 
-        inp_files = sorted(os.listdir(os.path.join(rgb_dir, 'input')))
-        tar_files = sorted(os.listdir(os.path.join(rgb_dir, 'target')))
+        inp_files = sorted(os.listdir(os.path.join(rgb_dir, 'data')))
+        tar_files = sorted(os.listdir(os.path.join(rgb_dir, 'gt')))
 
-        self.inp_filenames = [os.path.join(rgb_dir, 'input', x)  for x in inp_files if is_image_file(x)]
-        self.tar_filenames = [os.path.join(rgb_dir, 'target', x) for x in tar_files if is_image_file(x)]
+        # self.inp_filenames = [os.path.join(rgb_dir, 'data', x)  for x in inp_files if is_image_file(x)]
+        # self.tar_filenames = [os.path.join(rgb_dir, 'gt', x) for x in tar_files if is_image_file(x)]
+        self.inp_filenames = [x  for x in inp_files if is_image_file(x)]
+        self.tar_filenames = [x for x in tar_files if is_image_file(x)]
 
         self.img_options = img_options
         self.sizex       = len(self.tar_filenames)  # get the size of target
