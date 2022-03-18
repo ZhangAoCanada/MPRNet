@@ -119,23 +119,22 @@ class DataLoaderVal(Dataset):
         inp_img = Image.open(inp_path)
         tar_img = Image.open(tar_path)
 
-        # Resizing image in the multiple of 16"
-        wd_new,ht_new = inp_img.size
-        if ht_new>wd_new and ht_new>256:
-            wd_new = int(np.ceil(wd_new*256/ht_new))
-            ht_new = 256
-        elif ht_new<=wd_new and wd_new>256:
-            ht_new = int(np.ceil(ht_new*1024/wd_new))
-            wd_new = 256
-        wd_new = int(16*np.ceil(wd_new/16.0))
-        ht_new = int(16*np.ceil(ht_new/16.0))
-        inp_img = inp_img.resize((wd_new,ht_new), Image.ANTIALIAS)
-        tar_img = tar_img.resize((wd_new, ht_new), Image.ANTIALIAS)
+        # # Resizing image in the multiple of 16"
+        # wd_new,ht_new = inp_img.size
+        # if ht_new>wd_new and ht_new>256:
+        #     wd_new = int(np.ceil(wd_new*256/ht_new))
+        #     ht_new = 256
+        # elif ht_new<=wd_new and wd_new>256:
+        #     ht_new = int(np.ceil(ht_new*1024/wd_new))
+        #     wd_new = 256
+        # wd_new = int(16*np.ceil(wd_new/16.0))
+        # ht_new = int(16*np.ceil(ht_new/16.0))
+        # inp_img = inp_img.resize((wd_new,ht_new), Image.ANTIALIAS)
+        # tar_img = tar_img.resize((wd_new, ht_new), Image.ANTIALIAS)
 
-        # # Validate on center crop
-        # if self.ps is not None:
-        #     inp_img = TF.center_crop(inp_img, (ps,ps))
-        #     tar_img = TF.center_crop(tar_img, (ps,ps))
+        # Validate on center crop
+        inp_img = TF.center_crop(inp_img, (480,720))
+        tar_img = TF.center_crop(tar_img, (480,720))
 
         inp_img = TF.to_tensor(inp_img)
         tar_img = TF.to_tensor(tar_img)
