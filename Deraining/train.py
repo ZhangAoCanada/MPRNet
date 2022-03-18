@@ -119,8 +119,13 @@ for epoch in range(start_epoch, opt.OPTIM.NUM_EPOCHS + 1):
         restored = model_restoration(input_)
  
         # Compute loss at each stage
-        loss_char = torch.sum([criterion_char(restored[j],target) for j in range(len(restored))])
-        loss_edge = torch.sum([criterion_edge(restored[j],target) for j in range(len(restored))])
+        # loss_char = torch.sum([criterion_char(restored[j],target) for j in range(len(restored))])
+        # loss_edge = torch.sum([criterion_edge(restored[j],target) for j in range(len(restored))])
+        loss_char = torch.zeros((1)).cuda()
+        loss_edge = torch.zeros((1)).cuda()
+        for j in range(len(restored)):
+          loss_char += criterion_char(restored[j],target)
+          loss_edge += criterion_edge(restored[j],target)
         loss = (loss_char) + (0.05*loss_edge)
         
         loss.backward()
