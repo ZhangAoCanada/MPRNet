@@ -93,7 +93,7 @@ train_dataset = get_training_data(train_dir, {'patch_size':opt.TRAINING.TRAIN_PS
 train_loader = DataLoader(dataset=train_dataset, batch_size=opt.OPTIM.BATCH_SIZE, shuffle=True, num_workers=16, drop_last=False, pin_memory=True)
 
 val_dataset = get_validation_data(val_dir, {'patch_size':opt.TRAINING.VAL_PS})
-val_loader = DataLoader(dataset=val_dataset, batch_size=16, shuffle=False, num_workers=8, drop_last=False, pin_memory=True)
+val_loader = DataLoader(dataset=val_dataset, batch_size=1, shuffle=False, num_workers=8, drop_last=False, pin_memory=True)
 
 print('===> Start Epoch {} End Epoch {}'.format(start_epoch,opt.OPTIM.NUM_EPOCHS + 1))
 print('===> Loading datasets')
