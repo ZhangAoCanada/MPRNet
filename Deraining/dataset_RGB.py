@@ -17,10 +17,10 @@ class DataLoaderTrain(Dataset):
         inp_files = sorted(os.listdir(os.path.join(rgb_dir, 'data')))
         tar_files = sorted(os.listdir(os.path.join(rgb_dir, 'gt')))
 
-        # self.inp_filenames = [os.path.join(rgb_dir, 'data', x)  for x in inp_files if is_image_file(x)]
-        # self.tar_filenames = [os.path.join(rgb_dir, 'gt', x) for x in tar_files if is_image_file(x)]
-        self.inp_filenames = [x  for x in inp_files if is_image_file(x)]
-        self.tar_filenames = [x for x in tar_files if is_image_file(x)]
+        self.inp_filenames = [os.path.join(rgb_dir, 'data', x)  for x in inp_files if is_image_file(x)]
+        self.tar_filenames = [os.path.join(rgb_dir, 'gt', x) for x in tar_files if is_image_file(x)]
+        # self.inp_filenames = [x  for x in inp_files if is_image_file(x)]
+        # self.tar_filenames = [x for x in tar_files if is_image_file(x)]
 
         self.img_options = img_options
         self.sizex       = len(self.tar_filenames)  # get the size of target
@@ -96,10 +96,10 @@ class DataLoaderVal(Dataset):
         inp_files = sorted(os.listdir(os.path.join(rgb_dir, 'data')))
         tar_files = sorted(os.listdir(os.path.join(rgb_dir, 'gt')))
 
-        # self.inp_filenames = [os.path.join(rgb_dir, 'data', x)  for x in inp_files if is_image_file(x)]
-        # self.tar_filenames = [os.path.join(rgb_dir, 'gt', x) for x in tar_files if is_image_file(x)]
-        self.inp_filenames = [x  for x in inp_files if is_image_file(x)]
-        self.tar_filenames = [x for x in tar_files if is_image_file(x)]
+        self.inp_filenames = [os.path.join(rgb_dir, 'data', x)  for x in inp_files if is_image_file(x)]
+        self.tar_filenames = [os.path.join(rgb_dir, 'gt', x) for x in tar_files if is_image_file(x)]
+        # self.inp_filenames = [x  for x in inp_files if is_image_file(x)]
+        # self.tar_filenames = [x for x in tar_files if is_image_file(x)]
 
         self.img_options = img_options
         self.sizex       = len(self.tar_filenames)  # get the size of target
