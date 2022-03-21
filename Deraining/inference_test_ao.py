@@ -37,8 +37,8 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 model_restoration = MPRNet()
 summary(model_restoration)
 
-utils.load_checkpoint(model_restoration,'./Deraining/CHKPOINT/Deraining/models/MPRNet/model_best.pth')
-print("===>Testing using weights: ",'./Deraining/CHKPOINT/Deraining/models/MPRNet/model_best.pth')
+utils.load_checkpoint(model_restoration,'./Deraining/checkpoints/Deraining/models/MPRNet/model_best.pth')
+print("===>Testing using weights: ",'./Deraining/checkpoints/Deraining/models/MPRNet/model_best.pth')
 model_restoration.to(device)
 model_restoration = nn.DataParallel(model_restoration)
 model_restoration.eval()
@@ -77,7 +77,7 @@ with torch.no_grad():
         restored = restored.permute(0, 2, 3, 1).cpu().detach().numpy()
         for batch in range(len(restored)):
             restored_img = img_as_ubyte(restored[batch])
-            utils.save_img((os.path.join('./Deraining/results', filenames[batch] + '.png')), restored_img)
+            utils.save_img((os.path.join('./Deraining/checkpoints/Deraining/results/MPRNet/', filenames[batch] + '.png')), restored_img)
 
     # psnr_val_rgb = torch.stack(psnr_val_rgb).mean().item()
     # print("[Best_PSNR: %.4f Total_time: %.4f  Avg_time: %.4f]" % (psnr_val_rgb, totaltime, totaltime / num))

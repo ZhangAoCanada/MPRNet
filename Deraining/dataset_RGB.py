@@ -162,5 +162,8 @@ class DataLoaderTest(Dataset):
         filename = os.path.splitext(os.path.split(path_inp)[-1])[0]
         inp = Image.open(path_inp)
 
+        ### NOTE: how to solve this ###
+        # inp = TF.center_crop(inp, (480,720))
+
         inp = TF.to_tensor(inp)
         return inp, filename
