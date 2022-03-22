@@ -30,11 +30,14 @@ model_restoration.to(device)
 model_restoration = nn.DataParallel(model_restoration)
 model_restoration.eval()
 
+video_saving_dir = "./checkpoints/Deraining/results/MPRNet/"
+if not os.path.exists(video_saving_dir):
+    os.mkdirs(video_saving_dir)
 
 # video_path = "/content/drive/MyDrive/DERAIN/DATA_captured/something_else/sample_video.mp4"
-# output_video_path = "./videos/result_video.avi"
+# output_video_path = os.path.join(video_saving_dir, "result_video.avi")
 video_path = "/content/drive/MyDrive/DERAIN/DATA_captured/something_else/sample_video1.mp4"
-output_video_path = "./videos/result_video1.avi"
+output_video_path = os.path.join(video_saving_dir, "result_video1.avi")
 video = cv2.VideoCapture(video_path)
 video_saving = cv2.VideoWriter(output_video_path,cv2.VideoWriter_fourcc('M','J','P','G'),30,(2040,720))
 
