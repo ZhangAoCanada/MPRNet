@@ -38,7 +38,7 @@ utils.mkdir(video_saving_dir)
 video_path = "/content/drive/MyDrive/DERAIN/DATA_captured/something_else/sample_video1.mp4"
 output_video_path = os.path.join(video_saving_dir, "result_video1.avi")
 video = cv2.VideoCapture(video_path)
-video_saving = cv2.VideoWriter(output_video_path,cv2.VideoWriter_fourcc('M','J','P','G'),30,(2000,720))
+video_saving = cv2.VideoWriter(output_video_path,cv2.VideoWriter_fourcc('M','J','P','G'),30,(2020,720))
 
 
 with torch.no_grad():
