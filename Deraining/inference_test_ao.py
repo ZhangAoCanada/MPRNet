@@ -1,5 +1,7 @@
 import sys
 sys.path.append('/content/drive/MyDrive/DERAIN/MPRNet/Deraining')
+from config import Config 
+opt = Config('training.yml')
 from difflib import restore
 import torch.nn as nn
 import torch
@@ -44,7 +46,7 @@ model_restoration = nn.DataParallel(model_restoration)
 model_restoration.eval()
 
 
-val_dataset = get_validation_data('/content/drive/MyDrive/DERAIN/test', None)
+val_dataset = get_validation_data('/content/drive/MyDrive/DERAIN/test', {'patch_size':opt.TRAINING.VAL_PS})
 val_loader = DataLoader(dataset=val_dataset, batch_size=1, shuffle=False, drop_last=False)
 
 all_inference_time = []
