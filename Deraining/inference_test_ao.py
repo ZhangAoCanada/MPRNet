@@ -44,7 +44,7 @@ model_restoration = nn.DataParallel(model_restoration)
 model_restoration.eval()
 
 
-val_dataset = get_validation_data('/content/drive/MyDrive/DERAIN/test')
+val_dataset = get_validation_data('/content/drive/MyDrive/DERAIN/test', None)
 val_loader = DataLoader(dataset=val_dataset, batch_size=1, shuffle=False, drop_last=False)
 
 all_inference_time = []
