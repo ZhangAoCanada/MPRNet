@@ -32,7 +32,7 @@ model_restoration.eval()
 
 video_saving_dir = "./checkpoints/Deraining/videos/MPRNet/"
 if not os.path.exists(video_saving_dir):
-    os.mkdirs(video_saving_dir)
+    os.mkdir(video_saving_dir)
 
 # video_path = "/content/drive/MyDrive/DERAIN/DATA_captured/something_else/sample_video.mp4"
 # output_video_path = os.path.join(video_saving_dir, "result_video.avi")
