@@ -55,7 +55,7 @@ with torch.no_grad():
         restored = restored.permute(0, 2, 3, 1).cpu().detach().numpy()
         restored_img = img_as_ubyte(restored[0])
         image = np.concatenate((frame, restored_img[..., ::-1]), axis=1)
-        print(image.shape)
+        # print(image.shape)
         video_saving.write(image)
 
 
