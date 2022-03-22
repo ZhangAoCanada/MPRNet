@@ -76,7 +76,7 @@ with torch.no_grad():
         #     psnr_val_rgb.append(utils.torchPSNR(res, tar))
 
         # restored = restored.permute(0, 2, 3, 1)
-        restored = restored[0].permute(0, 2, 3, 1).cpu().detach().numpy()
+        restored = torch.clamp(restored[0], 0, 1).permute(0, 2, 3, 1).cpu().detach().numpy()
         print("[DEBUG] ", filenames)
         print("[DEBUG] ", restored.shape)
         for batch in range(len(restored)):
