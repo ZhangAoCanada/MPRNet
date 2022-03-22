@@ -74,7 +74,6 @@ scheduler.step()
 pretrained_path = "./pretrained_models/pretrained.pth"
 if opt.TRAINING.RESUME:
     latest_models = glob(os.path.join(model_dir,'*%s'%("_latest.pth")))
-    print("[DEBUG INFO] ", os.path.join(model_dir,'*%s'%("_latest.pth")))
     if len(latest_models) > 0:
         path_chk_rest    = utils.get_last_path(model_dir, '_latest.pth')
         utils.load_checkpoint(model_restoration,path_chk_rest)
