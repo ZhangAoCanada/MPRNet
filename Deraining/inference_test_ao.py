@@ -58,6 +58,7 @@ with torch.no_grad():
         target = data_val[0].to(device)
         input_ = data_val[1].to(device)
         filenames = data_val[2]
+        print("[DEBUG] ", filenames)
 
         start_time = time.time()
         with torch.no_grad():
