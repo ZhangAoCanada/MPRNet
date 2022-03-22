@@ -65,7 +65,7 @@ with torch.no_grad():
         all_inference_time.append(time.time() - start_time)
 
         restored = torch.clamp(restored[0], 0, 1)
-        restored_img = restored_img.cpu().numpy().squeeze().transpose((1,2,0))
+        restored_img = restored.cpu().numpy().squeeze().transpose((1,2,0))
         gt = target[0].cpu().numpy().squeeze().transpose((1,2,0))
 
         # --- Calculate the average PSNR --- #
