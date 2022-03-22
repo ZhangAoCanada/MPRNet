@@ -75,8 +75,8 @@ with torch.no_grad():
         # for res, tar in zip(restored[0], target):
         #     psnr_val_rgb.append(utils.torchPSNR(res, tar))
 
-        restored = restored.permute(0, 2, 3, 1)
-        restored = restored.permute(0, 2, 3, 1).cpu().detach().numpy()
+        # restored = restored.permute(0, 2, 3, 1)
+        # restored = restored.permute(0, 2, 3, 1).cpu().detach().numpy()
         for batch in range(len(restored)):
             restored_img = img_as_ubyte(restored[batch])
             utils.save_img((os.path.join('./checkpoints/Deraining/results/MPRNet/', filenames[batch] + '.png')), restored_img)
