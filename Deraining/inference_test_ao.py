@@ -64,21 +64,21 @@ with torch.no_grad():
             restored = model_restoration(input_)
         all_inference_time.append(time.time() - start_time)
 
-        restored = torch.clamp(restored[0], 0, 1).cpu().numpy().squeeze().transpose((1,2,0))
+        restored_img = torch.clamp(restored[0], 0, 1).cpu().numpy().squeeze().transpose((1,2,0))
         gt = target[0].cpu().numpy().squeeze().transpose((1,2,0))
 
         # --- Calculate the average PSNR --- #
-        psnr_list.extend(calc_psnr(restored, gt))
+        psnr_list.extend(calc_psnr(restored_img, gt))
         # --- Calculate the average SSIM --- #
-        ssim_list.extend(calc_ssim(restored, gt))
+        ssim_list.extend(calc_ssim(restored_img, gt))
 
         # for res, tar in zip(restored[0], target):
         #     psnr_val_rgb.append(utils.torchPSNR(res, tar))
 
         # restored = restored.permute(0, 2, 3, 1)
-        # restored = restored.permute(0, 2, 3, 1).cpu().detach().numpy()
+        restored = restored.permute(0, 2, 3, 1).cpu().detach().numpy()
         print("[DEBUG] ", filenames)
-        print("[DEBUG] ", len(restored))
+        print("[DEBUG] ", restored.shape)
         for batch in range(len(restored)):
             restored_img = img_as_ubyte(restored[batch])
             utils.save_img((os.path.join('./checkpoints/Deraining/results/MPRNet/', filenames[batch] + '.png')), restored_img)
