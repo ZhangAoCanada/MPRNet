@@ -37,7 +37,7 @@ def calc_ssim(im1, im2):
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 model_restoration = MPRNet()
-summary(model_restoration)
+# summary(model_restoration)
 
 utils.load_checkpoint(model_restoration,'./checkpoints/Deraining/models/MPRNet/model_best.pth')
 print("===>Testing using weights: ",'./checkpoints/Deraining/models/MPRNet/model_best.pth')
@@ -58,7 +58,6 @@ with torch.no_grad():
         target = data_val[0].to(device)
         input_ = data_val[1].to(device)
         filenames = data_val[2]
-        print("[DEBUG] ", filenames)
 
         start_time = time.time()
         with torch.no_grad():
@@ -78,6 +77,8 @@ with torch.no_grad():
 
         # restored = restored.permute(0, 2, 3, 1)
         # restored = restored.permute(0, 2, 3, 1).cpu().detach().numpy()
+        print("[DEBUG] ", filenames)
+        print("[DEBUG] ", len(restored))
         for batch in range(len(restored)):
             restored_img = img_as_ubyte(restored[batch])
             utils.save_img((os.path.join('./checkpoints/Deraining/results/MPRNet/', filenames[batch] + '.png')), restored_img)
