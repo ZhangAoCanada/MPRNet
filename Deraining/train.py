@@ -70,18 +70,25 @@ scheduler = GradualWarmupScheduler(optimizer, multiplier=1, total_epoch=warmup_e
 scheduler.step()
 
 ######### Resume ###########
+pretrained_path = "./pretrained_models/pretrained.pth"
 if opt.TRAINING.RESUME:
     path_chk_rest    = utils.get_last_path(model_dir, '_latest.pth')
-    utils.load_checkpoint(model_restoration,path_chk_rest)
-    start_epoch = utils.load_start_epoch(path_chk_rest) + 1
-    utils.load_optim(optimizer, path_chk_rest)
+    if os.path.exists(path_chk_rest):
+        utils.load_checkpoint(model_restoration,path_chk_rest)
+        start_epoch = utils.load_start_epoch(path_chk_rest) + 1
+        utils.load_optim(optimizer, path_chk_rest)
 
-    for i in range(1, start_epoch):
-        scheduler.step()
-    new_lr = scheduler.get_lr()[0]
-    print('------------------------------------------------------------------------------')
-    print("==> Resuming Training with learning rate:", new_lr)
-    print('------------------------------------------------------------------------------')
+        for i in range(1, start_epoch):
+            scheduler.step()
+        new_lr = scheduler.get_lr()[0]
+        print('------------------------------------------------------------------------------')
+        print("==> Resuming Training with learning rate:", new_lr)
+        print('------------------------------------------------------------------------------')
+    elif os.path.exists(pretrained_path):
+        utils.load_checkpoint(model_restoration,pretrained_path)
+        print('------------------------------------------------------------------------------')
+        print("==> Resuming pretrained model (on OpenDataset).")
+        print('------------------------------------------------------------------------------')
 
 if len(device_ids)>1:
     model_restoration = nn.DataParallel(model_restoration, device_ids = device_ids)
