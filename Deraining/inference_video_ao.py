@@ -30,7 +30,7 @@ model_restoration.to(device)
 model_restoration = nn.DataParallel(model_restoration)
 model_restoration.eval()
 
-video_saving_dir = "./checkpoints/Deraining/results/MPRNet/"
+video_saving_dir = "./checkpoints/Deraining/videos/MPRNet/"
 if not os.path.exists(video_saving_dir):
     os.mkdirs(video_saving_dir)
 
@@ -39,7 +39,7 @@ if not os.path.exists(video_saving_dir):
 video_path = "/content/drive/MyDrive/DERAIN/DATA_captured/something_else/sample_video1.mp4"
 output_video_path = os.path.join(video_saving_dir, "result_video1.avi")
 video = cv2.VideoCapture(video_path)
-video_saving = cv2.VideoWriter(output_video_path,cv2.VideoWriter_fourcc('M','J','P','G'),30,(2040,720))
+video_saving = cv2.VideoWriter(output_video_path,cv2.VideoWriter_fourcc('M','J','P','G'),30,(2000,720))
 
 
 with torch.no_grad():
@@ -49,7 +49,7 @@ with torch.no_grad():
             break
         frame = frame[:, 180:1200, :]
         pil_img = Image.fromarray(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
-        # pil_img = TF.center_crop(pil_img, (720, 1080))
+        pil_img = TF.center_crop(pil_img, (720, 1000))
         input_img = TF.to_tensor(pil_img)
         restored = model_restoration(input_img.unsqueeze(0))
         restored = torch.clamp(restored[0], 0, 1)
