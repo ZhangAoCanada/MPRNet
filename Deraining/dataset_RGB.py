@@ -147,8 +147,8 @@ class DataLoaderVal(Dataset):
         # tar_img = tar_img.resize((wd_new, ht_new), Image.ANTIALIAS)
 
         # Validate on center crop
-        inp_img = TF.center_crop(inp_img, (480,720))
-        tar_img = TF.center_crop(tar_img, (480,720))
+        inp_img = TF.center_crop(inp_img, (720,1080))
+        tar_img = TF.center_crop(tar_img, (720,1080))
 
         inp_img = TF.to_tensor(inp_img)
         tar_img = TF.to_tensor(tar_img)
