@@ -27,6 +27,7 @@ import losses
 from warmup_scheduler import GradualWarmupScheduler
 from tqdm import tqdm
 from pdb import set_trace as stx
+from glob import glob
 
 from torch.utils.tensorboard import SummaryWriter
 
@@ -72,8 +73,10 @@ scheduler.step()
 ######### Resume ###########
 pretrained_path = "./pretrained_models/pretrained.pth"
 if opt.TRAINING.RESUME:
-    path_chk_rest    = utils.get_last_path(model_dir, '_latest.pth')
-    if os.path.exists(path_chk_rest):
+    latest_models = glob(os.path.join(model_dir,'*%s'%("_latest.pth")))
+    print("[DEBUG INFO] ", os.path.join(model_dir,'*%s'%("_latest.pth")))
+    if len(latest_models) > 0:
+        path_chk_rest    = utils.get_last_path(model_dir, '_latest.pth')
         utils.load_checkpoint(model_restoration,path_chk_rest)
         start_epoch = utils.load_start_epoch(path_chk_rest) + 1
         utils.load_optim(optimizer, path_chk_rest)
