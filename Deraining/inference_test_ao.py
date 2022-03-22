@@ -64,7 +64,8 @@ with torch.no_grad():
             restored = model_restoration(input_)
         all_inference_time.append(time.time() - start_time)
 
-        restored_img = torch.clamp(restored[0], 0, 1).cpu().numpy().squeeze().transpose((1,2,0))
+        restored = torch.clamp(restored[0], 0, 1)
+        restored_img = restored_img.cpu().numpy().squeeze().transpose((1,2,0))
         gt = target[0].cpu().numpy().squeeze().transpose((1,2,0))
 
         # --- Calculate the average PSNR --- #
@@ -76,9 +77,7 @@ with torch.no_grad():
         #     psnr_val_rgb.append(utils.torchPSNR(res, tar))
 
         # restored = restored.permute(0, 2, 3, 1)
-        restored = torch.clamp(restored[0], 0, 1).permute(0, 2, 3, 1).cpu().detach().numpy()
-        print("[DEBUG] ", filenames)
-        print("[DEBUG] ", restored.shape)
+        restored = restored.permute(0, 2, 3, 1).cpu().detach().numpy()
         for batch in range(len(restored)):
             restored_img = img_as_ubyte(restored[batch])
             utils.save_img((os.path.join('./checkpoints/Deraining/results/MPRNet/', filenames[batch] + '.png')), restored_img)
