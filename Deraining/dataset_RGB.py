@@ -20,8 +20,13 @@ class DataLoaderTrain(Dataset):
         # self.inp_filenames = [os.path.join(rgb_dir, 'data', x)  for x in inp_files if is_image_file(x)]
         # self.tar_filenames = [os.path.join(rgb_dir, 'gt', x) for x in tar_files if is_image_file(x)]
 
-        inp_files = sorted(os.listdir(os.path.join(rgb_dir, 'rain_L')))
-        tar_files = sorted(os.listdir(os.path.join(rgb_dir, 'gt')))
+        inp_files_L = sorted(os.listdir(os.path.join(rgb_dir, 'rain_L')))
+        inp_files_H = sorted(os.listdir(os.path.join(rgb_dir, 'rain_H')))
+        tar_files_L = sorted(os.listdir(os.path.join(rgb_dir, 'gt')))
+        tar_files_H = sorted(os.listdir(os.path.join(rgb_dir, 'gt')))
+
+        inp_files = inp_files_L + inp_files_H
+        tar_files = tar_files_L + tar_files_H
 
         self.inp_filenames = [os.path.join(rgb_dir, 'rain_L', x)  for x in inp_files if is_image_file(x)]
         self.tar_filenames = [os.path.join(rgb_dir, 'gt', x) for x in tar_files if is_image_file(x)]

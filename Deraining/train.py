@@ -108,6 +108,8 @@ val_loader = DataLoader(dataset=val_dataset, batch_size=1, shuffle=False, num_wo
 
 print('===> Start Epoch {} End Epoch {}'.format(start_epoch,opt.OPTIM.NUM_EPOCHS + 1))
 print('===> Loading datasets')
+print("===> Training set: {} samples".format(len(train_dataset)))
+print("===> Validation set: {} samples".format(len(val_dataset)))
 
 log_dir = "./logs"
 if not os.path.exists(log_dir):

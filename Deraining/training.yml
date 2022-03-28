@@ -26,7 +26,7 @@ TRAINING:
   VAL_PS: 256
   # TRAIN_DIR: '/content/drive/MyDrive/DERAIN/train'       # path to training data
   # VAL_DIR: '/content/drive/MyDrive/DERAIN/test' # path to validation data
-  TRAIN_DIR: '/content/drive/MyDrive/DERAIN/DATA_captured'       # path to training data
-  VAL_DIR: '/content/drive/MyDrive/DERAIN/DATA_captured' # path to validation data
+  TRAIN_DIR: '/content/drive/MyDrive/DERAIN/DATA_20220325/train'       # path to training data
+  VAL_DIR: '/content/drive/MyDrive/DERAIN/DATA_20220325/validate' # path to validation data
   SAVE_DIR: './checkpoints'           # path to save models and images
   # SAVE_IMAGES: False
