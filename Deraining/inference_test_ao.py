@@ -81,7 +81,7 @@ with torch.no_grad():
         restored = restored.permute(0, 2, 3, 1).cpu().detach().numpy()
         for batch in range(len(restored)):
             restored_img = img_as_ubyte(restored[batch])
-            utils.save_img((os.path.join('./checkpoints/Deraining/results/MPRNet/', filenames[batch] + '.png')), restored_img)
+            utils.save_img((os.path.join('./checkpoints/Deraining_2070images/results/MPRNet/', filenames[batch] + '_pred.png')), restored_img)
 
     # psnr_val_rgb = torch.stack(psnr_val_rgb).mean().item()
     # print("[Best_PSNR: %.4f Total_time: %.4f  Avg_time: %.4f]" % (psnr_val_rgb, totaltime, totaltime / num))
@@ -124,7 +124,7 @@ with torch.no_grad():
         restored = restored.permute(0, 2, 3, 1).cpu().detach().numpy()
         for batch in range(len(restored)):
             restored_img = img_as_ubyte(restored[batch])
-            utils.save_img((os.path.join('./checkpoints/Deraining/results/MPRNet/', filenames[batch] + '.png')), restored_img)
+            utils.save_img((os.path.join('./checkpoints/Deraining_2070images/results/MPRNet/', filenames[batch] + '_pred.png')), restored_img)
 
     # psnr_val_rgb = torch.stack(psnr_val_rgb).mean().item()
     # print("[Best_PSNR: %.4f Total_time: %.4f  Avg_time: %.4f]" % (psnr_val_rgb, totaltime, totaltime / num))

@@ -208,7 +208,7 @@ class DataLoaderTestRainL(Dataset):
         inp_img = TF.to_tensor(inp_img)
         tar_img = TF.to_tensor(tar_img)
 
-        filename = os.path.splitext(os.path.split(tar_path)[-1])[0]
+        filename = os.path.splitext(os.path.split(inp_path)[-1])[0]
 
         return tar_img, inp_img, filename
 
@@ -247,7 +247,7 @@ class DataLoaderTestRainH(Dataset):
         inp_img = TF.to_tensor(inp_img)
         tar_img = TF.to_tensor(tar_img)
 
-        filename = os.path.splitext(os.path.split(tar_path)[-1])[0]
+        filename = os.path.splitext(os.path.split(inp_path)[-1])[0]
 
         return tar_img, inp_img, filename
 
