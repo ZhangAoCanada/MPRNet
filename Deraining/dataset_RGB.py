@@ -25,11 +25,14 @@ class DataLoaderTrain(Dataset):
         tar_files_L = sorted(os.listdir(os.path.join(rgb_dir, 'gt')))
         tar_files_H = sorted(os.listdir(os.path.join(rgb_dir, 'gt')))
 
-        inp_files = inp_files_L + inp_files_H
-        tar_files = tar_files_L + tar_files_H
+        self.inp_filenames_L = [os.path.join(rgb_dir, 'rain_L', x)  for x in inp_files_L if is_image_file(x)]
+        self.tar_filenames_L = [os.path.join(rgb_dir, 'gt', x) for x in tar_files_L if is_image_file(x)]
 
-        self.inp_filenames = [os.path.join(rgb_dir, 'rain_L', x)  for x in inp_files if is_image_file(x)]
-        self.tar_filenames = [os.path.join(rgb_dir, 'gt', x) for x in tar_files if is_image_file(x)]
+        self.inp_filenames_H = [os.path.join(rgb_dir, 'rain_H', x)  for x in inp_files_H if is_image_file(x)]
+        self.tar_filenames_H = [os.path.join(rgb_dir, 'gt', x) for x in tar_files_H if is_image_file(x)]
+
+        self.inp_filenames = self.inp_filenames_L + self.inp_filenames_H
+        self.tar_filenames = self.tar_filenames_L + self.tar_filenames_H
 
         # self.inp_filenames = [x  for x in inp_files if is_image_file(x)]
         # self.tar_filenames = [x for x in tar_files if is_image_file(x)]
@@ -111,11 +114,19 @@ class DataLoaderVal(Dataset):
         # self.inp_filenames = [os.path.join(rgb_dir, 'data', x)  for x in inp_files if is_image_file(x)]
         # self.tar_filenames = [os.path.join(rgb_dir, 'gt', x) for x in tar_files if is_image_file(x)]
 
-        inp_files = sorted(os.listdir(os.path.join(rgb_dir, 'rain_L')))
-        tar_files = sorted(os.listdir(os.path.join(rgb_dir, 'gt')))
+        inp_files_L = sorted(os.listdir(os.path.join(rgb_dir, 'rain_L')))
+        inp_files_H = sorted(os.listdir(os.path.join(rgb_dir, 'rain_H')))
+        tar_files_L = sorted(os.listdir(os.path.join(rgb_dir, 'gt')))
+        tar_files_H = sorted(os.listdir(os.path.join(rgb_dir, 'gt')))
 
-        self.inp_filenames = [os.path.join(rgb_dir, 'rain_L', x)  for x in inp_files if is_image_file(x)]
-        self.tar_filenames = [os.path.join(rgb_dir, 'gt', x) for x in tar_files if is_image_file(x)]
+        self.inp_filenames_L = [os.path.join(rgb_dir, 'rain_L', x)  for x in inp_files_L if is_image_file(x)]
+        self.tar_filenames_L = [os.path.join(rgb_dir, 'gt', x) for x in tar_files_L if is_image_file(x)]
+
+        self.inp_filenames_H = [os.path.join(rgb_dir, 'rain_H', x)  for x in inp_files_H if is_image_file(x)]
+        self.tar_filenames_H = [os.path.join(rgb_dir, 'gt', x) for x in tar_files_H if is_image_file(x)]
+
+        self.inp_filenames = self.inp_filenames_L + self.inp_filenames_H
+        self.tar_filenames = self.tar_filenames_L + self.tar_filenames_H
 
         # self.inp_filenames = [x  for x in inp_files if is_image_file(x)]
         # self.tar_filenames = [x for x in tar_files if is_image_file(x)]
