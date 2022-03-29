@@ -89,7 +89,7 @@ if opt.TRAINING.RESUME:
     elif os.path.exists(pretrained_path):
         utils.load_checkpoint(model_restoration,pretrained_path)
         print('------------------------------------------------------------------------------')
-        print("==> Resuming pretrained model (on OpenDataset).")
+        print("==> Resuming pretrained model.")
         print('------------------------------------------------------------------------------')
 
 if len(device_ids)>1:
@@ -179,10 +179,10 @@ for epoch in range(start_epoch, opt.OPTIM.NUM_EPOCHS + 1):
 
         print("[epoch %d PSNR: %.4f --- best_epoch %d Best_PSNR %.4f]" % (epoch, psnr_val_rgb, best_epoch, best_psnr))
 
-        torch.save({'epoch': epoch, 
-                    'state_dict': model_restoration.state_dict(),
-                    'optimizer' : optimizer.state_dict()
-                    }, os.path.join(model_dir,f"model_epoch_{epoch}.pth")) 
+        # torch.save({'epoch': epoch, 
+        #             'state_dict': model_restoration.state_dict(),
+        #             'optimizer' : optimizer.state_dict()
+        #             }, os.path.join(model_dir,f"model_epoch_{epoch}.pth")) 
 
     scheduler.step()
     
