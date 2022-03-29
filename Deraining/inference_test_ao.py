@@ -49,6 +49,8 @@ test_rainL_dataset = get_test_rain_L_data('/content/drive/MyDrive/DERAIN/DATA_20
 test_rainL_loader = DataLoader(dataset=test_rainL_dataset, batch_size=1, shuffle=False, drop_last=False)
 test_rainH_dataset = get_test_rain_H_data('/content/drive/MyDrive/DERAIN/DATA_20220325/test', {'patch_size':opt.TRAINING.VAL_PS})
 test_rainH_loader = DataLoader(dataset=test_rainH_dataset, batch_size=1, shuffle=False, drop_last=False)
+print("===>Test RainL dataset size: ", len(test_rainL_dataset))
+print("===>Test RainH dataset size: ", len(test_rainH_dataset))
 
 all_inference_time = []
 psnr_list = []
