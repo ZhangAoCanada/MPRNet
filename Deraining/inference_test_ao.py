@@ -33,8 +33,8 @@ def calc_ssim(im1, im2):
     return ans
 # ------------------------------------------------------
 
-model_path = './checkpoints/Deraining/models/MPRNet/model_best.pth'
-testset_path = './checkpoints/Deraining/models/MPRNet/model_best.pth'
+model_path = './checkpoints/Deraining_2070images/models/MPRNet/model_best.pth'
+testset_path = '/content/drive/MyDrive/DERAIN/DATA_20220325/test'
 
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
