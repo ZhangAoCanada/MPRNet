@@ -100,7 +100,7 @@ psnr_list_H = []
 ssim_list_H = []
 with torch.no_grad():
     psnr_val_rgb = []
-    for ii, data_val in enumerate(tqdm(test_rainL_loader), 0):
+    for ii, data_val in enumerate(tqdm(test_rainH_dataset), 0):
         target = data_val[0].to(device)
         input_ = data_val[1].to(device)
         filenames = data_val[2]
