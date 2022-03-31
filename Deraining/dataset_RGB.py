@@ -176,7 +176,7 @@ class DataLoaderVal(Dataset):
 
 class DataLoaderTestRainL(Dataset):
     def __init__(self, rgb_dir, img_options=None, rgb_dir2=None):
-        super(DataLoaderVal, self).__init__()
+        super(DataLoaderTestRainL, self).__init__()
         inp_files = sorted(os.listdir(os.path.join(rgb_dir, 'rain_L')))
         tar_files = sorted(os.listdir(os.path.join(rgb_dir, 'gt')))
 
@@ -215,7 +215,7 @@ class DataLoaderTestRainL(Dataset):
 
 class DataLoaderTestRainH(Dataset):
     def __init__(self, rgb_dir, img_options=None, rgb_dir2=None):
-        super(DataLoaderVal, self).__init__()
+        super(DataLoaderTestRainH, self).__init__()
         inp_files = sorted(os.listdir(os.path.join(rgb_dir, 'rain_H')))
         tar_files = sorted(os.listdir(os.path.join(rgb_dir, 'gt')))
 
