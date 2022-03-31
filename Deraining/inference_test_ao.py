@@ -33,21 +33,24 @@ def calc_ssim(im1, im2):
     return ans
 # ------------------------------------------------------
 
+model_path = './checkpoints/Deraining/models/MPRNet/model_best.pth'
+testset_path = './checkpoints/Deraining/models/MPRNet/model_best.pth'
+
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 model_restoration = MPRNet()
 # summary(model_restoration)
 
-utils.load_checkpoint(model_restoration,'./checkpoints/Deraining/models/MPRNet/model_best.pth')
-print("===>Testing using weights: ",'./checkpoints/Deraining/models/MPRNet/model_best.pth')
+utils.load_checkpoint(model_restoration, model_path)
+print("===>Testing using weights: ", model_path)
 model_restoration.to(device)
 model_restoration = nn.DataParallel(model_restoration)
 model_restoration.eval()
 
-test_rainL_dataset = get_test_rain_L_data('/content/drive/MyDrive/DERAIN/DATA_20220325/test', {'patch_size':opt.TRAINING.VAL_PS})
+test_rainL_dataset = get_test_rain_L_data(testset_path, {'patch_size':opt.TRAINING.VAL_PS})
 test_rainL_loader = DataLoader(dataset=test_rainL_dataset, batch_size=1, shuffle=False, drop_last=False)
-test_rainH_dataset = get_test_rain_H_data('/content/drive/MyDrive/DERAIN/DATA_20220325/test', {'patch_size':opt.TRAINING.VAL_PS})
+test_rainH_dataset = get_test_rain_H_data(testset_path, {'patch_size':opt.TRAINING.VAL_PS})
 test_rainH_loader = DataLoader(dataset=test_rainH_dataset, batch_size=1, shuffle=False, drop_last=False)
 print("===>Test RainL dataset size: ", len(test_rainL_dataset))
 print("===>Test RainH dataset size: ", len(test_rainH_dataset))
