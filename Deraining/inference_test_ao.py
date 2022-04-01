@@ -110,7 +110,6 @@ def inferenceOneDir(testset_path, sub_name):
             target = data_val[0].to(device)
             input_ = data_val[1].to(device)
             filenames = data_val[2]
-            print("------ debug -----", target.shape, input_.shape)
 
             start_time = time.time()
             restored = model_restoration(input_)
