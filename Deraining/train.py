@@ -110,6 +110,7 @@ print('===> Start Epoch {} End Epoch {}'.format(start_epoch,opt.OPTIM.NUM_EPOCHS
 print('===> Loading datasets')
 print("===> Training set: {} samples".format(len(train_dataset)))
 print("===> Validation set: {} samples".format(len(val_dataset)))
+print("===> patch_size: {}".format(opt.TRAINING.TRAIN_PS))
 
 log_dir = "./logs"
 if not os.path.exists(log_dir):
