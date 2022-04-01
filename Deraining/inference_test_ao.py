@@ -62,43 +62,43 @@ def inferenceOneDir(testset_path, sub_name):
     psnr_list = []
     ssim_list = []
 
-    # all_inference_time_L = []
-    # psnr_list_L = []
-    # ssim_list_L = []
-    # with torch.no_grad():
-    #     psnr_val_rgb = []
-    #     for ii, data_val in enumerate(tqdm(test_rainL_loader), 0):
-    #         target = data_val[0].to(device)
-    #         input_ = data_val[1].to(device)
-    #         filenames = data_val[2]
+    all_inference_time_L = []
+    psnr_list_L = []
+    ssim_list_L = []
+    with torch.no_grad():
+        psnr_val_rgb = []
+        for ii, data_val in enumerate(tqdm(test_rainL_loader), 0):
+            target = data_val[0].to(device)
+            input_ = data_val[1].to(device)
+            filenames = data_val[2]
 
-    #         start_time = time.time()
-    #         restored = model_restoration(input_)
-    #         all_inference_time.append(time.time() - start_time)
-    #         all_inference_time_L.append(time.time() - start_time)
+            start_time = time.time()
+            restored = model_restoration(input_)
+            all_inference_time.append(time.time() - start_time)
+            all_inference_time_L.append(time.time() - start_time)
 
-    #         restored = torch.clamp(restored[0], 0, 1)
-    #         restored_img = restored.cpu().numpy().squeeze().transpose((1,2,0))
-    #         gt = target[0].cpu().numpy().squeeze().transpose((1,2,0))
+            restored = torch.clamp(restored[0], 0, 1)
+            restored_img = restored.cpu().numpy().squeeze().transpose((1,2,0))
+            gt = target[0].cpu().numpy().squeeze().transpose((1,2,0))
 
-    #         # --- Calculate the average PSNR --- #
-    #         psnr_list.extend(calc_psnr(restored_img, gt))
-    #         psnr_list_L.extend(calc_psnr(restored_img, gt))
-    #         # --- Calculate the average SSIM --- #
-    #         ssim_list.extend(calc_ssim(restored_img, gt))
-    #         ssim_list_L.extend(calc_ssim(restored_img, gt))
+            # --- Calculate the average PSNR --- #
+            psnr_list.extend(calc_psnr(restored_img, gt))
+            psnr_list_L.extend(calc_psnr(restored_img, gt))
+            # --- Calculate the average SSIM --- #
+            ssim_list.extend(calc_ssim(restored_img, gt))
+            ssim_list_L.extend(calc_ssim(restored_img, gt))
 
-    #         # for res, tar in zip(restored[0], target):
-    #         #     psnr_val_rgb.append(utils.torchPSNR(res, tar))
+            # for res, tar in zip(restored[0], target):
+            #     psnr_val_rgb.append(utils.torchPSNR(res, tar))
 
-    #         # restored = restored.permute(0, 2, 3, 1)
-    #         restored = restored.permute(0, 2, 3, 1).cpu().detach().numpy()
-    #         for batch in range(len(restored)):
-    #             restored_img = img_as_ubyte(restored[batch])
-    #             utils.save_img((os.path.join('./checkpoints/Deraining_2070images/results/MPRNet/', filenames[batch] + '_pred.png')), restored_img)
+            # restored = restored.permute(0, 2, 3, 1)
+            restored = restored.permute(0, 2, 3, 1).cpu().detach().numpy()
+            for batch in range(len(restored)):
+                restored_img = img_as_ubyte(restored[batch])
+                utils.save_img((os.path.join('./checkpoints/Deraining_2070images/results/MPRNet/', filenames[batch] + '_pred.png')), restored_img)
 
-    #     # psnr_val_rgb = torch.stack(psnr_val_rgb).mean().item()
-    #     # print("[Best_PSNR: %.4f Total_time: %.4f  Avg_time: %.4f]" % (psnr_val_rgb, totaltime, totaltime / num))
+        # psnr_val_rgb = torch.stack(psnr_val_rgb).mean().item()
+        # print("[Best_PSNR: %.4f Total_time: %.4f  Avg_time: %.4f]" % (psnr_val_rgb, totaltime, totaltime / num))
 
 
     all_inference_time_H = []
