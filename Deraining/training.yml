@@ -12,7 +12,7 @@ MODEL:
 
 # Optimization arguments.
 OPTIM:
-  BATCH_SIZE: 4
+  BATCH_SIZE: 1
   NUM_EPOCHS: 1000
   # NEPOCH_DECAY: [10]
   LR_INITIAL: 2e-4
@@ -22,8 +22,8 @@ OPTIM:
 TRAINING:
   VAL_AFTER_EVERY: 1
   RESUME: True
-  TRAIN_PS: 256
-  VAL_PS: 256
+  TRAIN_PS: 512
+  VAL_PS: 512
   # TRAIN_DIR: '/content/drive/MyDrive/DERAIN/train'       # path to training data
   # VAL_DIR: '/content/drive/MyDrive/DERAIN/test' # path to validation data
   TRAIN_DIR: '/content/drive/MyDrive/DERAIN/DATA_20220325/train'       # path to training data
