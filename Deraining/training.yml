@@ -22,8 +22,8 @@ OPTIM:
 TRAINING:
   VAL_AFTER_EVERY: 1
   RESUME: True
-  TRAIN_PS: 500
-  VAL_PS: 500
+  TRAIN_PS: 400
+  VAL_PS: 400
   # TRAIN_DIR: '/content/drive/MyDrive/DERAIN/train'       # path to training data
   # VAL_DIR: '/content/drive/MyDrive/DERAIN/test' # path to validation data
   TRAIN_DIR: '/content/drive/MyDrive/DERAIN/DATA_20220325/train'       # path to training data
