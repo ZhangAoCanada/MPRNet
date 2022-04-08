@@ -24,8 +24,8 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 model_restoration = MPRNet()
 # summary(model_restoration)
 
-utils.load_checkpoint(model_restoration,'./checkpoints/Deraining/models/MPRNet/model_best.pth')
-print("===>Testing using weights: ",'./checkpoints/Deraining/models/MPRNet/model_best.pth')
+utils.load_checkpoint(model_restoration,'./checkpoints/Deraining_2070images/models/MPRNet/model_best_256.pth')
+print("===>Testing using weights: ",'./checkpoints/Deraining_2070images/models/MPRNet/model_best_256.pth')
 model_restoration.to(device)
 model_restoration = nn.DataParallel(model_restoration)
 model_restoration.eval()
@@ -35,6 +35,8 @@ utils.mkdir(video_saving_dir)
 
 video_path = "/content/drive/MyDrive/DERAIN/DATA_captured/something_else/dusty_video1.mp4"
 output_video_path = os.path.join(video_saving_dir, "dusty_video1_result.avi")
+# video_path = "/content/drive/MyDrive/DERAIN/DATA_captured/something_else/dusty_water_video1.mp4"
+# output_video_path = os.path.join(video_saving_dir, "dusty_water_video1_result.avi")
 # video_path = "/content/drive/MyDrive/DERAIN/DATA_captured/something_else/sample_video1.mp4"
 # output_video_path = os.path.join(video_saving_dir, "result_video1.avi")
 
