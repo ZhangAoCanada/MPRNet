@@ -20,7 +20,8 @@ import torchvision.transforms.functional as TF
 from collections import OrderedDict
 
 def load_checkpoint(model, weights):
-    checkpoint = torch.load(weights, map_location=torch.device('cpu'))
+    # checkpoint = torch.load(weights, map_location=torch.device('cpu'))
+    checkpoint = torch.load(weights)
     try:
         model.load_state_dict(checkpoint["state_dict"])
     except:
@@ -74,6 +75,7 @@ input_img = input_img.unsqueeze(0)
 
 torch.onnx.export(model_restoration, input_img, "./checkpoints/mprnet.onnx", verbose=True, input_names=["input"], output_names=["output"])
 
+print("[FINISHED] onnx model exported")
 
 # restored = model_restoration(input_img)
 # restored = restored[0].cpu().detach().numpy()
