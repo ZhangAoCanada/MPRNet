@@ -64,6 +64,7 @@ while True:
     if not ret:
         break
     # sample_image = cv2.resize(frame, (960, 540))
+    sample_image = frame
     break
 
 
