@@ -74,6 +74,7 @@ def preProcess(image):
 
 
 input_img = preProcess(sample_image)
+input_img.to(device)
 input_img = input_img.unsqueeze(0)
 
 
