@@ -44,7 +44,7 @@ model_path = './checkpoints/Deraining_2070images/models/MPRNet/model_best_256.pt
 load_checkpoint(model_restoration, model_path)
 # utils.load_checkpoint(model_restoration, model_path)
 print("===>Testing using weights: ", model_path)
-model_restoration.to(device)
+# model_restoration.to(device)
 model_restoration = nn.DataParallel(model_restoration)
 model_restoration.eval()
 
