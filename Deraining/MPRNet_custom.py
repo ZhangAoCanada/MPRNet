@@ -261,12 +261,13 @@ class MPRNet(nn.Module):
         self.tail     = conv(n_feat+scale_orsnetfeats, out_c, kernel_size, bias=bias)
 
     def preProcess(self, x):
-        x = x.permute(0,3,1,2)
+        # x = x.permute(0,3,1,2)
         return x
     
     def postProcess(self, x):
         x = x.permute(0,2,3,1)
-        x = torch.clamp(x, min=0, max=1)
+        # x = torch.clamp(x, min=0, max=1)
+        x = x.clamp(0, 1)
         return x
 
 

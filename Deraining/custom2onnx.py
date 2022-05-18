@@ -69,8 +69,8 @@ while True:
 
 def preProcess(image):
     image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-    image = torch.from_numpy(image.astype(np.float32))
-    # image = TF.to_tensor(Image.fromarray(image))
+    # image = torch.from_numpy(image.astype(np.float32))
+    image = TF.to_tensor(Image.fromarray(image))
     return image
 
 
