@@ -48,7 +48,7 @@ model_restoration = nn.DataParallel(model_restoration)
 model_restoration.eval()
 
 model_restoration = model_restoration.module
-model_restoration.to(device)
+# model_restoration.to(device)
 
 
 # video_path = "/home/ao/tmp/clip_videos/h97cam_water_video.mp4"
@@ -69,14 +69,16 @@ while True:
 
 def preProcess(image):
     image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-    image = torch.from_numpy(image.astype(np.float32))
+    # image = torch.from_numpy(image.astype(np.float32))
+    image = TF.to_tensor(Image.fromarray(image))
     return image
 
 
 input_img = preProcess(sample_image)
 input_img = input_img.unsqueeze(0)
+print(input_img.shape)
 # input_img.to(device)
-input_img.cuda()
+# input_img.cuda()
 
 
 torch.onnx.export(model_restoration, input_img, "./checkpoints/mprnet.onnx", verbose=True, input_names=["input"], output_names=["output"])
