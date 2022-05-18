@@ -44,7 +44,7 @@ model_path = './checkpoints/Deraining_2070images/models/MPRNet/model_best_256.pt
 load_checkpoint(model_restoration, model_path)
 # utils.load_checkpoint(model_restoration, model_path)
 print("===>Testing using weights: ", model_path)
-# model_restoration.to(device)
+model_restoration.to(device)
 model_restoration = nn.DataParallel(model_restoration)
 model_restoration.eval()
 
@@ -78,7 +78,7 @@ def preProcess(image):
 input_img = preProcess(sample_image)
 input_img = input_img.unsqueeze(0)
 print("[INFO] input shape ", input_img.shape)
-# input_img.to(device)
+input_img.to(device)
 # input_img.cuda()
 
 
