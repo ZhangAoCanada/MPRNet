@@ -14,11 +14,13 @@ def preProcess(image):
     return image
 
 
-video_path = "/home/ao/tmp/clip_videos/h97cam_water_video.mp4"
+# video_path = "/home/ao/tmp/clip_videos/h97cam_water_video.mp4"
+video_path = "/content/drive/MyDrive/DERAIN/DATA_captured/something_else/dusty_water_video1.mp4"
 video = cv2.VideoCapture(video_path)
 
 
-ort_session = ort.InferenceSession("./checkpoints/mprnet.onnx")
+model_path = './checkpoints/mprnet.onnx'
+ort_session = ort.InferenceSession(model_path)
 
 while 1:
     ret, frame = video.read()
