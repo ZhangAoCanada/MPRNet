@@ -45,7 +45,7 @@ model_restoration.to(device)
 model_restoration = nn.DataParallel(model_restoration)
 model_restoration.eval()
 
-# model_restoration = model_restoration.module
+model_restoration = model_restoration.module
 
 
 # video_path = "/home/ao/tmp/clip_videos/h97cam_water_video.mp4"
