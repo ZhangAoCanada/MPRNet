@@ -38,7 +38,7 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 model_restoration = MPRNet()
 # summary(model_restoration)
 
-model_path = './checkpoints/model_best_256.pth'
+model_path = './checkpoints/Deraining_2070images/models/MPRNet/model_best_256.pth'
 load_checkpoint(model_restoration, model_path)
 print("===>Testing using weights: ", model_path)
 model_restoration.to(device)
@@ -48,7 +48,8 @@ model_restoration.eval()
 model_restoration = model_restoration.module
 
 
-video_path = "/home/ao/tmp/clip_videos/h97cam_water_video.mp4"
+# video_path = "/home/ao/tmp/clip_videos/h97cam_water_video.mp4"
+video_path = "/content/drive/MyDrive/DERAIN/DATA_captured/something_else/dusty_water_video1.mp4"
 
 video = cv2.VideoCapture(video_path)
 
