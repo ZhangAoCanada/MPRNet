@@ -20,11 +20,12 @@ from PIL import Image
 import torchvision.transforms.functional as TF
 from collections import OrderedDict
 
-device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+# device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+device = torch.device('cpu')
 
 def load_checkpoint(model, weights):
-    # checkpoint = torch.load(weights, map_location=torch.device('cpu'))
-    checkpoint = torch.load(weights)
+    checkpoint = torch.load(weights, map_location=torch.device('cpu'))
+    # checkpoint = torch.load(weights)
     try:
         model.load_state_dict(checkpoint["state_dict"])
     except:
@@ -40,8 +41,8 @@ model_restoration = MPRNet()
 # summary(model_restoration)
 
 model_path = './checkpoints/Deraining_2070images/models/MPRNet/model_best_256.pth'
-# load_checkpoint(model_restoration, model_path)
-utils.load_checkpoint(model_restoration, model_path)
+load_checkpoint(model_restoration, model_path)
+# utils.load_checkpoint(model_restoration, model_path)
 print("===>Testing using weights: ", model_path)
 model_restoration.to(device)
 model_restoration = nn.DataParallel(model_restoration)
@@ -62,15 +63,14 @@ while True:
     ret, frame = video.read()
     if not ret:
         break
-    sample_image = frame[:, 180:1200, :]
     # sample_image = cv2.resize(frame, (960, 540))
     break
 
 
 def preProcess(image):
     image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-    # image = torch.from_numpy(image.astype(np.float32))
-    image = TF.to_tensor(TF.center_crop(Image.fromarray(image), (720, 1000)))
+    image = torch.from_numpy(image.astype(np.float32))
+    # image = TF.to_tensor(TF.center_crop(Image.fromarray(image), (720, 1000)))
     return image
 
 
