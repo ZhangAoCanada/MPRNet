@@ -74,8 +74,9 @@ def preProcess(image):
 
 
 input_img = preProcess(sample_image)
-input_img.to(device)
 input_img = input_img.unsqueeze(0)
+# input_img.to(device)
+input_img.cuda()
 
 
 torch.onnx.export(model_restoration, input_img, "./checkpoints/mprnet.onnx", verbose=True, input_names=["input"], output_names=["output"])
