@@ -82,7 +82,7 @@ input_img.to(device)
 # input_img.cuda()
 
 
-torch.onnx.export(model_restoration, input_img, "./checkpoints/mprnet.onnx", verbose=True, input_names=["input"], output_names=["output"])
+torch.onnx.export(model_restoration, input_img, "./checkpoints/mprnet.onnx", verbose=True, input_names=["input"], output_names=["output"], opset_version=10)
 
 print("[FINISHED] onnx model exported")
 
