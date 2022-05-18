@@ -69,14 +69,14 @@ while True:
 
 def preProcess(image):
     image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-    # image = torch.from_numpy(image.astype(np.float32))
-    image = TF.to_tensor(Image.fromarray(image))
+    image = torch.from_numpy(image.astype(np.float32))
+    # image = TF.to_tensor(Image.fromarray(image))
     return image
 
 
 input_img = preProcess(sample_image)
 input_img = input_img.unsqueeze(0)
-print(input_img.shape)
+print("[INFO] input shape ", input_img.shape)
 # input_img.to(device)
 # input_img.cuda()
 
