@@ -62,7 +62,7 @@ while True:
     ret, frame = video.read()
     if not ret:
         break
-    sample_image = frame
+    sample_image = frame[:, 180:1200, :]
     # sample_image = cv2.resize(frame, (960, 540))
     break
 
@@ -70,7 +70,7 @@ while True:
 def preProcess(image):
     image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
     # image = torch.from_numpy(image.astype(np.float32))
-    image = TF.to_tensor(Image.fromarray(image))
+    image = TF.to_tensor(TF.center_crop(Image.fromarray(image), (720, 1000)))
     return image
 
 
