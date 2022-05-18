@@ -1,4 +1,5 @@
 import sys
+sys.path.append('/content/drive/MyDrive/DERAIN/MPRNet/Deraining')
 from config import Config 
 opt = Config('training.yml')
 from difflib import restore
@@ -19,6 +20,8 @@ from PIL import Image
 import torchvision.transforms.functional as TF
 from collections import OrderedDict
 
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
 def load_checkpoint(model, weights):
     # checkpoint = torch.load(weights, map_location=torch.device('cpu'))
     checkpoint = torch.load(weights)
@@ -33,19 +36,19 @@ def load_checkpoint(model, weights):
         model.load_state_dict(new_state_dict)
 
 
-device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-
 model_restoration = MPRNet()
 # summary(model_restoration)
 
 model_path = './checkpoints/Deraining_2070images/models/MPRNet/model_best_256.pth'
-load_checkpoint(model_restoration, model_path)
+# load_checkpoint(model_restoration, model_path)
+utils.load_checkpoint(model_restoration, model_path)
 print("===>Testing using weights: ", model_path)
 model_restoration.to(device)
 model_restoration = nn.DataParallel(model_restoration)
 model_restoration.eval()
 
 model_restoration = model_restoration.module
+model_restoration.to(device)
 
 
 # video_path = "/home/ao/tmp/clip_videos/h97cam_water_video.mp4"
