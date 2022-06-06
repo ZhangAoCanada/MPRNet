@@ -71,7 +71,7 @@ scheduler = GradualWarmupScheduler(optimizer, multiplier=1, total_epoch=warmup_e
 scheduler.step()
 
 ######### Resume ###########
-pretrained_path = "./pretrained_models/pretrained.pth"
+pretrained_path = "./pretrained_models/pretrained_512_on_data2070.pth"
 if opt.TRAINING.RESUME:
     latest_models = glob(os.path.join(model_dir,'*%s'%("_latest.pth")))
     if len(latest_models) > 0:

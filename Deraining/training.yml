@@ -7,7 +7,7 @@ GPU: [0,1,2,3]
 VERBOSE: True
 
 MODEL:
-  MODE: 'Deraining_2070images'
+  MODE: 'Deraining_20220531'
   SESSION: 'MPRNet'
 
 # Optimization arguments.

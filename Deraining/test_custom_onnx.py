@@ -14,8 +14,8 @@ def preProcess(image):
     return image
 
 
-# video_path = "/home/ao/tmp/clip_videos/h97cam_water_video.mp4"
-video_path = "/content/drive/MyDrive/DERAIN/DATA_captured/something_else/dusty_water_video1.mp4"
+video_path = "/home/ao/tmp/clip_videos/h97cam_water_video.mp4"
+# video_path = "/content/drive/MyDrive/DERAIN/DATA_captured/something_else/dusty_water_video1.mp4"
 video = cv2.VideoCapture(video_path)
 
 
@@ -26,6 +26,7 @@ while 1:
     ret, frame = video.read()
     if not ret:
         break
+    frame = cv2.resize(frame, (640, 360))
     input_image = preProcess(frame)
     raw = ort_session.run(None, {"input": input_image})
     pred = raw[0][0]
