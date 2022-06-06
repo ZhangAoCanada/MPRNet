@@ -35,7 +35,7 @@ def calc_ssim(im1, im2):
 
 model_path = './checkpoints/Deraining_2070images/models/MPRNet/model_best.pth'
 
-testset_root_dir = "/content/drive/MyDrive/DERAIN/DATA_20220325/test_specific"
+testset_root_dir = "/content/drive/MyDrive/DERAIN/DATA_20220531/test_specific"
 sub_dir_names = ["dawn_cloudy", "night_outdoors", "sunny_outdoors", "underground"]
 
 

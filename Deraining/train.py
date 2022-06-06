@@ -89,7 +89,7 @@ if opt.TRAINING.RESUME:
     elif os.path.exists(pretrained_path):
         utils.load_checkpoint(model_restoration,pretrained_path)
         print('------------------------------------------------------------------------------')
-        print("==> Resuming pretrained model.")
+        print("==> Resuming pretrained model with imageData2070.")
         print('------------------------------------------------------------------------------')
 
 if len(device_ids)>1:
