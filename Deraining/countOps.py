@@ -42,7 +42,7 @@ def load_checkpoint(model, weights):
 model_restoration = MPRNet()
 # summary(model_restoration)
 
-model_path = './checkpoints/Deraining_2070images/models/MPRNet/model_best_256.pth'
+model_path = './pretrained_models/pretrained_256_on_data2070.pth'
 load_checkpoint(model_restoration, model_path)
 # utils.load_checkpoint(model_restoration, model_path)
 print("===>Testing using weights: ", model_path)
